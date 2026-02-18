@@ -1,15 +1,44 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
-<title>berhasil</title>
+<title>Hiburan</title>
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: yellow;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: orange;
+}
+</style>
 </head>
-<body style="text-align:center; font-family:Arial; background-color:lightblue;">
+<body>
 
-<h2>Mau Hiburan Apa Hari Ini?</h2>
+<h2>🎉 Mau Hiburan Apa Hari Ini? 🎉</h2>
 
-<button onclick="alert('Rekomendasi: Bioskop')">Bioskop</button>
-<button onclick="alert('Rekomendasi: Pantai')">Pantai</button>
-<button onclick="alert('Rekomendasi: Mall')">Mall</button>
+<p>Pilih suasana dulu:</p>
 
-</body>
-</html>
+<button onclick="suasana('rame')">Rame</button>
+<button onclick="suasana('tenang')">Tenang</button>
+
+<div id="lanjut"></div>
+<h3 id="hasil"></h3>
+
+<script>
+function suasana(pilihan) {
+  if (pilihan === "rame") {
+    document.getElementById("lanjut").innerHTML =
+      "<p>Pilih tempat:</p>" +
+      "<button onclick=\"hasil('Mall 🏬')\">Mall</button>" +
+      "<button onclick=\"hasil('Bioskop 🎬')\">Bioskop</button>" +

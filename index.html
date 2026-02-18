@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Hiburan</title>
@@ -42,3 +42,21 @@ function suasana(pilihan) {
       "<p>Pilih tempat:</p>" +
       "<button onclick=\"hasil('Mall 🏬')\">Mall</button>" +
       "<button onclick=\"hasil('Bioskop 🎬')\">Bioskop</button>" +
+      "<button onclick=\"hasil('Karaoke 🎤')\">Karaoke</button>";
+  } else {
+    document.getElementById("lanjut").innerHTML =
+      "<p>Pilih tempat:</p>" +
+      "<button onclick=\"hasil('Pantai 🏖️')\">Pantai</button>" +
+      "<button onclick=\"hasil('Taman 🌳')\">Taman</button>" +
+      "<button onclick=\"hasil('Perpustakaan 📚')\">Perpustakaan</button>";
+  }
+}
+
+function hasil(tempat) {
+  document.getElementById("hasil").innerHTML =
+    "Rekomendasi Hiburan Untuk Kamu: " + tempat;
+}
+</script>
+
+</body>
+</html>

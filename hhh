@@ -2,21 +2,43 @@
 <html>
 <head>
 <title>Hiburan</title>
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  background-color: yellow;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: orange;
+}
+</style>
 </head>
-<body style="text-align:center; font-family:Arial; background-color:lightblue;">
 
-<h2>Mau Hiburan Apa?</h2>
+<body>
 
-<button onclick="pilih('Bioskop')">Bioskop</button>
-<button onclick="pilih('Pantai')">Pantai</button>
-<button onclick="pilih('Mall')">Mall</button>
+<h2>🎉 Mau Hiburan Apa Hari Ini? 🎉</h2>
+
+<button onclick="pilih('Bioskop 🎬')">Bioskop</button>
+<button onclick="pilih('Pantai 🏖️')">Pantai</button>
+<button onclick="pilih('Mall 🏬')">Mall</button>
 
 <h3 id="hasil"></h3>
 
 <script>
 function pilih(tempat){
   document.getElementById("hasil").innerHTML =
-  "Rekomendasi: " + tempat;
+  "Rekomendasi Hiburan: " + tempat;
 }
 </script>
 

@@ -8,7 +8,7 @@ body {
   text-align: center;
   font-family: Arial;
   background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: red;
+  color: yellow;
 }
 
 button {
@@ -64,12 +64,21 @@ function pilihSuasana(suasana) {
   } else if (tempat === "luar" && suasana === "rame") {
     rekomendasi = "pasar ";
   } else {
-    rekomendasi = "Taman ";
+    rekomendasi = " dikamar aja ";
+  }  if (tempat === "dalam" && suasana === "rame") {
+    rekomendasi = "bioskop ";
+  } else if (tempat === "dalam" && suasana === "tenang") {
+    rekomendasi = "kamar kosan ";
+  } else if (tempat === "luar" && suasana === "rame") {
+    rekomendasi = "pasar malam ";
+  } else {
+    rekomendasi = "alun alun ";
   }
+
 
   document.getElementById("pertanyaan").innerHTML = "";
   document.getElementById("hasil").innerHTML =
-    "Rekomendasi Hiburan Untuk Kamu: " + rekomendasi;
+    "cobaaaa untuk Kamu: " + rekomendasi;
 }
 
 </script>

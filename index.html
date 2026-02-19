@@ -8,7 +8,7 @@ body {
   text-align: center;
   font-family: Arial;
   background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: white;
+  color: red;
 }
 
 button {
@@ -16,7 +16,7 @@ button {
   margin: 10px;
   border: none;
   border-radius: 8px;
-  background-color: yellow;
+  background-color: blue;
   cursor: pointer;
   font-size: 16px;
 }
@@ -29,10 +29,10 @@ button:hover {
 
 <body>
 
-<h2>🎉 Quiz Pilih Hiburan 🎉</h2>
+<h2>🎉 izenk izenk 🎉</h2>
 
 <div id="pertanyaan">
-  <p>Kamu mau hiburan di mana?</p>
+  <p> kamu mau hiburan di mana?</p>
   <button onclick="pilihTempat('dalam')">Dalam ruangan</button>
   <button onclick="pilihTempat('luar')">Luar ruangan</button>
 </div>
@@ -58,13 +58,13 @@ function pilihSuasana(suasana) {
   let rekomendasi = "";
 
   if (tempat === "dalam" && suasana === "rame") {
-    rekomendasi = "Mall 🏬";
+    rekomendasi = "Mall ";
   } else if (tempat === "dalam" && suasana === "tenang") {
-    rekomendasi = "Bioskop 🎬";
+    rekomendasi = "kamar hotel ";
   } else if (tempat === "luar" && suasana === "rame") {
-    rekomendasi = "Pantai 🏖️";
+    rekomendasi = "pasar ";
   } else {
-    rekomendasi = "Taman 🌳";
+    rekomendasi = "Taman ";
   }
 
   document.getElementById("pertanyaan").innerHTML = "";

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hiburan</title>
+<title>Quiz Hiburan</title>
 
 <style>
 body {
@@ -29,39 +29,47 @@ button:hover {
 
 <body>
 
-<h2>🎉 Mau Hiburan Apa Hari Ini? 🎉</h2>
+<h2>🎉 Quiz Pilih Hiburan 🎉</h2>
 
-<p>Pilih suasana:</p>
+<div id="pertanyaan">
+  <p>Kamu mau hiburan di mana?</p>
+  <button onclick="pilihTempat('dalam')">Dalam ruangan</button>
+  <button onclick="pilihTempat('luar')">Luar ruangan</button>
+</div>
 
-<button onclick="pilihRame()">Rame</button>
-<button onclick="pilihTenang()">Tenang</button>
-
-<div id="lanjut"></div>
 <h3 id="hasil"></h3>
 
 <script>
 
-function pilihRame() {
-  document.getElementById("lanjut").innerHTML = `
-    <p>Pilih tempat:</p>
-    <button onclick="hasil('Mall 🏬')">Mall</button>
-    <button onclick="hasil('Bioskop 🎬')">Bioskop</button>
-    <button onclick="hasil('Karaoke 🎤')">Karaoke</button>
+let tempat = "";
+
+function pilihTempat(pilihan) {
+  tempat = pilihan;
+
+  document.getElementById("pertanyaan").innerHTML = `
+    <p>Kamu mau suasana seperti apa?</p>
+    <button onclick="pilihSuasana('rame')">Rame</button>
+    <button onclick="pilihSuasana('tenang')">Tenang</button>
   `;
 }
 
-function pilihTenang() {
-  document.getElementById("lanjut").innerHTML = `
-    <p>Pilih tempat:</p>
-    <button onclick="hasil('Pantai 🏖️')">Pantai</button>
-    <button onclick="hasil('Taman 🌳')">Taman</button>
-    <button onclick="hasil('Perpustakaan 📚')">Perpustakaan</button>
-  `;
-}
+function pilihSuasana(suasana) {
 
-function hasil(tempat) {
+  let rekomendasi = "";
+
+  if (tempat === "dalam" && suasana === "rame") {
+    rekomendasi = "Mall 🏬";
+  } else if (tempat === "dalam" && suasana === "tenang") {
+    rekomendasi = "Bioskop 🎬";
+  } else if (tempat === "luar" && suasana === "rame") {
+    rekomendasi = "Pantai 🏖️";
+  } else {
+    rekomendasi = "Taman 🌳";
+  }
+
+  document.getElementById("pertanyaan").innerHTML = "";
   document.getElementById("hasil").innerHTML =
-    "Rekomendasi Hiburan Untuk Kamu: " + tempat;
+    "Rekomendasi Hiburan Untuk Kamu: " + rekomendasi;
 }
 
 </script>

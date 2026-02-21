@@ -4,7 +4,6 @@
 <title>Kuis Hiburan Interaktif</title>
 
 <style>
-
 body{
 font-family:Arial;
 text-align:center;
@@ -38,7 +37,6 @@ background:orange;
 transform:scale(1.05);
 }
 
-/* progress bar */
 .progress{
 width:100%;
 background:#ccc;
@@ -52,16 +50,6 @@ background:lime;
 width:0%;
 border-radius:10px;
 }
-
-.fade{
-animation:fade 0.5s;
-}
-
-@keyframes fade{
-from{opacity:0;}
-to{opacity:1;}
-}
-
 </style>
 </head>
 
@@ -85,7 +73,7 @@ to{opacity:1;}
 <div id="bar" class="progress-bar"></div>
 </div>
 
-<div id="quiz" class="fade"></div>
+<div id="quiz"></div>
 
 <h3 id="hasil"></h3>
 
@@ -99,38 +87,62 @@ let data={};
 const pertanyaan=[
 
 {
-t:"BOSEN NII,enak nya hiburan di mana?",
-o:["Dalam Ruangan aja ","Luar Ruangan laa"]
+t:"Bosen nih, hiburan di mana?",
+o:[
+{text:"Dalam Ruangan aja",v:"dalam"},
+{text:"Luar Ruangan laa",v:"luar"}
+]
 },
 
 {
-t:"Suasana sesuai mood kamu yaa, apa yang di inginkan?",
-o:["Rame","Tenang"]
+t:"Suasana sesuai mood?",
+o:[
+{text:"Rame",v:"rame"},
+{text:"Tenang",v:"tenang"}
+]
 },
 
 {
-t:"malam siang atauuuuuuuu pilih sendiri deh",
-o:["Siang","Malam"]
+t:"Waktu hiburan?",
+o:[
+{text:"Siang",v:"siang"},
+{text:"Malam",v:"malam"}
+]
 },
 
 {
-t:"Budget kamu? ",
-o:["anak kos hehe","Bebas punya american express kok"]
+t:"Budget kamu?",
+o:[
+{text:"Anak kos hehe",v:"hemat"},
+{text:"Bebas 😎",v:"bebas"}
+]
 },
 
 {
-t:" mau dengan siapa?",
-o:["Sendiri aja ","Teman rasa pacar ","Pacar rasa teman"]
+t:"Pergi dengan siapa?",
+o:[
+{text:"Sendiri",v:"sendiri"},
+{text:"Teman",v:"teman"},
+{text:"Pacar",v:"pacar"}
+]
 },
 
 {
 t:"Aktivitas favorit?",
-o:["Makan","Main Game","Foto-foto"]
+o:[
+{text:"Makan",v:"makan"},
+{text:"Main Game",v:"game"},
+{text:"Foto-foto",v:"foto"}
+]
 },
 
 {
 t:"Mood kamu hari ini?",
-o:["Capek gilaa","Bahagia banget dong","Bosan gabut garing"]
+o:[
+{text:"Capek gilaa",v:"capek"},
+{text:"Bahagia banget",v:"bahagia"},
+{text:"Bosan gabut",v:"bosan"}
+]
 }
 
 ];
@@ -147,11 +159,10 @@ m.paused ? m.play() : m.pause();
 function tampilSoal(){
 
 let q=pertanyaan[step];
-
 let html=`<p>${q.t}</p>`;
 
 q.o.forEach(p=>{
-html+=`<button onclick="jawab('${p}')">${p}</button>`;
+html+=`<button onclick="jawab('${p.v}')">${p.text}</button>`;
 });
 
 document.getElementById("quiz").innerHTML=html;
@@ -176,10 +187,8 @@ document.getElementById("bar").style.width=persen+"%";
 }
 
 function loading(){
-
 document.getElementById("quiz").innerHTML=
-"⏳ Menganalisis kepribadian hiburan kamu...";
-
+"⏳ Menganalisis hiburan terbaik untuk kamu...";
 setTimeout(hasil,2000);
 }
 
@@ -187,36 +196,39 @@ function hasil(){
 
 let rekom="";
 
-/* PRIORITAS MOOD DULU */
-if(data.q6=="Capek"){
-rekom="Istirahat, SPA, atau Nonton Santai di Rumah 🛌";
+/* PRIORITAS MOOD */
+if(data.q6=="capek"){
+rekom="😴 Kamu lagi capek.<br>Rekomendasi: Istirahat, nonton film, atau spa santai.";
 }
 
-/* PRIORITAS BOSAN */
-else if(data.q6=="Bosan"){
-rekom="Jalan santai atau cari suasana baru 🌆";
+else if(data.q6=="bosan"){
+rekom="🌆 Kamu butuh suasana baru.<br>Rekomendasi: Jalan sore atau nongkrong ringan.";
 }
 
-/* PRIORITAS BAHAGIA */
-else if(data.q6=="Bahagia" && data.q1=="Rame"){
-rekom="Hangout atau Nongkrong Bareng Teman 🎉";
+else if(data.q6=="bahagia" && data.q1=="rame"){
+rekom="🎉 Mood kamu bagus!<br>Rekomendasi: Hangout atau kuliner malam.";
 }
 
-/* TEMPAT & SUASANA */
-else if(data.q0=="Dalam Ruangan" && data.q1=="Tenang"){
-rekom="Staycation + Movie Time 🎬";
+/* TEMPAT */
+else if(data.q0=="dalam" && data.q1=="tenang"){
+rekom="🎬 Staycation atau Movie Time.";
 }
 
-else if(data.q0=="Luar Ruangan" && data.q1=="Rame"){
-rekom="Festival atau Alun-Alun Kota 🎡";
+else if(data.q0=="luar" && data.q1=="rame"){
+rekom="🎡 Pergi ke festival atau alun-alun kota.";
 }
 
-else if(data.q5=="Foto-foto"){
-rekom="Wisata Instagramable 📸";
+/* AKTIVITAS */
+else if(data.q5=="foto"){
+rekom="📸 Wisata tempat instagramable.";
+}
+
+else if(data.q5=="game"){
+rekom="🎮 Main game atau game center.";
 }
 
 else{
-rekom="Santai di Cafe ☕";
+rekom="☕ Santai di cafe favorit.";
 }
 
 document.getElementById("quiz").innerHTML="";
@@ -224,10 +236,10 @@ document.getElementById("hasil").innerHTML=
 `
 ✅ Rekomendasi Hiburan Kamu:<br><br>
 <b>${rekom}</b><br><br>
-
 <button onclick="ulang()">Main Lagi</button>
 `;
 }
+
 function ulang(){
 location.reload();
 }

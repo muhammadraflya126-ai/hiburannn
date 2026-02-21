@@ -187,32 +187,47 @@ function hasil(){
 
 let rekom="";
 
-if(data.q0=="Dalam Ruangan" && data.q1=="Tenang"){
-rekom="Staycation + Nonton Film 🎬";
+/* PRIORITAS MOOD DULU */
+if(data.q6=="Capek"){
+rekom="Istirahat, SPA, atau Nonton Santai di Rumah 🛌";
 }
+
+/* PRIORITAS BOSAN */
+else if(data.q6=="Bosan"){
+rekom="Jalan santai atau cari suasana baru 🌆";
+}
+
+/* PRIORITAS BAHAGIA */
+else if(data.q6=="Bahagia" && data.q1=="Rame"){
+rekom="Hangout atau Nongkrong Bareng Teman 🎉";
+}
+
+/* TEMPAT & SUASANA */
+else if(data.q0=="Dalam Ruangan" && data.q1=="Tenang"){
+rekom="Staycation + Movie Time 🎬";
+}
+
 else if(data.q0=="Luar Ruangan" && data.q1=="Rame"){
 rekom="Festival atau Alun-Alun Kota 🎡";
 }
+
 else if(data.q5=="Foto-foto"){
 rekom="Wisata Instagramable 📸";
 }
-else if(data.q6=="Capek"){
-rekom="Spa atau Healing Santai 🧖";
-}
+
 else{
-rekom="Hangout Cafe bersama teman ☕";
+rekom="Santai di Cafe ☕";
 }
 
 document.getElementById("quiz").innerHTML="";
 document.getElementById("hasil").innerHTML=
 `
-✅ Rekomendasi Hiburan Kamu gassssssss polllll:<br><br>
+✅ Rekomendasi Hiburan Kamu:<br><br>
 <b>${rekom}</b><br><br>
 
-<button onclick="ulang()">Main Lagi ga?</button>
+<button onclick="ulang()">Main Lagi</button>
 `;
 }
-
 function ulang(){
 location.reload();
 }

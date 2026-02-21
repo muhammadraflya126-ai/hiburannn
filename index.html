@@ -1,78 +1,223 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quiz Hiburan</title>
+<title>Kuis Hiburan Interaktif</title>
 
 <style>
-body {
-  text-align: center;
-  font-family: Arial;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: green;
+
+body{
+font-family:Arial;
+text-align:center;
+background:linear-gradient(to right,#4facfe,#00f2fe);
+color:white;
 }
 
-button {
-  padding: 12px 20px;
-  margin: 10px;
-  border: none;
-  border-radius: 8px;
-  background-color: green;
-  cursor: pointer;
-  font-size: 16px;
+.container{
+width:500px;
+margin:auto;
+margin-top:40px;
+background:rgba(0,0,0,0.4);
+padding:30px;
+border-radius:15px;
 }
 
-button:hover {
-  background-color: orange;
+button{
+padding:12px 20px;
+margin:10px;
+border:none;
+border-radius:8px;
+background:#28a745;
+color:white;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
 }
+
+button:hover{
+background:orange;
+transform:scale(1.05);
+}
+
+/* progress bar */
+.progress{
+width:100%;
+background:#ccc;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.progress-bar{
+height:15px;
+background:lime;
+width:0%;
+border-radius:10px;
+}
+
+.fade{
+animation:fade 0.5s;
+}
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
 </style>
 </head>
 
 <body>
 
-<h2>🎉 izenk izenk ae 🎉</h2>
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
 
-<div id="pertanyaan">
-  <p> kamu mau hiburan di mana?</p>
-  <button onclick="pilihTempat('dalam')">Dalam ruangan</button>
-  <button onclick="pilihTempat('luar')">Luar ruangan</button>
+<audio id="klik">
+<source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
+
+<div class="container">
+
+<h2>🎮 Kuis Hiburan Pintar</h2>
+
+<button onclick="toggleMusic()">🎵 Musik ON/OFF</button>
+
+<div class="progress">
+<div id="bar" class="progress-bar"></div>
 </div>
+
+<div id="quiz" class="fade"></div>
 
 <h3 id="hasil"></h3>
 
+</div>
+
 <script>
 
-let tempat = "";
+let step=0;
+let data={};
 
-function pilihTempat(pilihan) {
-  tempat = pilihan;
+const pertanyaan=[
 
-  document.getElementById("pertanyaan").innerHTML = `
-    <p>Kamu mau suasana seperti apa?</p>
-    <button onclick="pilihSuasana('rame')">Rame</button>
-    <button onclick="pilihSuasana('tenang')">Tenang</button>
-  `;
+{
+t:"Kamu ingin hiburan di mana?",
+o:["Dalam Ruangan","Luar Ruangan"]
+},
+
+{
+t:"Suasana yang kamu inginkan?",
+o:["Rame","Tenang"]
+},
+
+{
+t:"Waktu hiburan?",
+o:["Siang","Malam"]
+},
+
+{
+t:"Budget kamu?",
+o:["Hemat","Bebas"]
+},
+
+{
+t:"Pergi dengan siapa?",
+o:["Sendiri","Teman","Pacar"]
+},
+
+{
+t:"Aktivitas favorit?",
+o:["Makan","Main Game","Foto-foto"]
+},
+
+{
+t:"Mood kamu hari ini?",
+o:["Capek","Bahagia","Bosan"]
 }
 
-function pilihSuasana(suasana) {
+];
 
-  let rekomendasi = "";
-
-  if (tempat === "dalam" && suasana === "rame") {
-    rekomendasi = "Mall atau bioskop ";
-  } else if (tempat === "dalam" && suasana === "tenang") {
-    rekomendasi = "kamar hotel atau kamar spa";
-  } else if (tempat === "luar" && suasana === "rame") {
-    rekomendasi = "pasar atau alun alun ";
-  } else {
-    rekomendasi = " dikamar aja ";
-  }
- 
-
-
-  document.getElementById("pertanyaan").innerHTML = "";
-  document.getElementById("hasil").innerHTML =
-    "cobaaaa untuk Kamu: " + rekomendasi;
+function sound(){
+document.getElementById("klik").play();
 }
+
+function toggleMusic(){
+let m=document.getElementById("music");
+m.paused ? m.play() : m.pause();
+}
+
+function tampilSoal(){
+
+let q=pertanyaan[step];
+
+let html=`<p>${q.t}</p>`;
+
+q.o.forEach(p=>{
+html+=`<button onclick="jawab('${p}')">${p}</button>`;
+});
+
+document.getElementById("quiz").innerHTML=html;
+updateProgress();
+}
+
+function jawab(j){
+sound();
+data["q"+step]=j;
+step++;
+
+if(step<pertanyaan.length){
+tampilSoal();
+}else{
+loading();
+}
+}
+
+function updateProgress(){
+let persen=(step/pertanyaan.length)*100;
+document.getElementById("bar").style.width=persen+"%";
+}
+
+function loading(){
+
+document.getElementById("quiz").innerHTML=
+"⏳ Menganalisis kepribadian hiburan kamu...";
+
+setTimeout(hasil,2000);
+}
+
+function hasil(){
+
+let rekom="";
+
+if(data.q0=="Dalam Ruangan" && data.q1=="Tenang"){
+rekom="Staycation + Nonton Film 🎬";
+}
+else if(data.q0=="Luar Ruangan" && data.q1=="Rame"){
+rekom="Festival atau Alun-Alun Kota 🎡";
+}
+else if(data.q5=="Foto-foto"){
+rekom="Wisata Instagramable 📸";
+}
+else if(data.q6=="Capek"){
+rekom="Spa atau Healing Santai 🧖";
+}
+else{
+rekom="Hangout Cafe bersama teman ☕";
+}
+
+document.getElementById("quiz").innerHTML="";
+document.getElementById("hasil").innerHTML=
+`
+✅ Rekomendasi Hiburan Kamu:<br><br>
+<b>${rekom}</b><br><br>
+
+<button onclick="ulang()">Main Lagi</button>
+`;
+}
+
+function ulang(){
+location.reload();
+}
+
+tampilSoal();
 
 </script>
 

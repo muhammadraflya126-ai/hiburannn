@@ -1,60 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+<meta charset="UTF-8">
 <title>Kuis Hiburan Interaktif</title>
 
 <style>
+
 body{
-font-family:Arial;
-text-align:center;
-background:linear-gradient(to right,#4facfe,#00f2fe);
-color:white;
+    font-family: Arial;
+    text-align:center;
+    background:linear-gradient(to right,#4facfe,#00f2fe);
+    color:white;
 }
 
 .container{
-width:500px;
-margin:auto;
-margin-top:40px;
-background:rgba(0,0,0,0.4);
-padding:30px;
-border-radius:15px;
+    width:500px;
+    margin:40px auto;
+    background:rgba(0,0,0,0.4);
+    padding:30px;
+    border-radius:15px;
 }
 
 button{
-padding:12px 20px;
-margin:10px;
-border:none;
-border-radius:8px;
-background:#28a745;
-color:white;
-font-size:16px;
-cursor:pointer;
-transition:0.3s;
+    padding:12px 20px;
+    margin:10px;
+    border:none;
+    border-radius:8px;
+    background:#28a745;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
 button:hover{
-background:orange;
-transform:scale(1.05);
+    background:orange;
+    transform:scale(1.05);
 }
 
 .progress{
-width:100%;
-background:#ccc;
-border-radius:10px;
-margin-bottom:20px;
+    width:100%;
+    background:#ccc;
+    border-radius:10px;
+    margin-bottom:20px;
 }
 
 .progress-bar{
-height:15px;
-background:lime;
-width:0%;
-border-radius:10px;
+    height:15px;
+    width:0%;
+    background:lime;
+    border-radius:10px;
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- AUDIO -->
 <audio id="music" loop>
 <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
@@ -67,24 +70,27 @@ border-radius:10px;
 
 <h2>🎮 IZENK IZENK AE</h2>
 
-<button onclick="toggleMusic()">🎵 Musik ON/OFF</button>
+<button onclick="toggleMusic()">🎵 Musik ON / OFF</button>
 
 <div class="progress">
 <div id="bar" class="progress-bar"></div>
 </div>
 
 <div id="quiz"></div>
-
 <h3 id="hasil"></h3>
 
 </div>
 
 <script>
 
-let step=0;
-let data={};
+/* ======================
+   DATA QUIZ
+====================== */
 
-const pertanyaan=[
+let step = 0;
+let data = {};
+
+const pertanyaan = [
 
 {
 t:"Bosen nih, hiburan di mana?",
@@ -147,103 +153,147 @@ o:[
 
 ];
 
+
+/* ======================
+   AUDIO
+====================== */
+
 function sound(){
 document.getElementById("klik").play();
 }
 
 function toggleMusic(){
-let m=document.getElementById("music");
-m.paused ? m.play() : m.pause();
+let music=document.getElementById("music");
+music.paused ? music.play() : music.pause();
 }
+
+
+/* ======================
+   TAMPILKAN SOAL
+====================== */
 
 function tampilSoal(){
 
-let q=pertanyaan[step];
-let html=`<p>${q.t}</p>`;
+let q = pertanyaan[step];
+let html = `<p>${q.t}</p>`;
 
 q.o.forEach(p=>{
-html+=`<button onclick="jawab('${p.v}')">${p.text}</button>`;
+html += `<button onclick="jawab('${p.v}')">${p.text}</button>`;
 });
 
-document.getElementById("quiz").innerHTML=html;
+document.getElementById("quiz").innerHTML = html;
 updateProgress();
 }
 
-function jawab(j){
+
+/* ======================
+   JAWABAN USER
+====================== */
+
+function jawab(jawaban){
 sound();
-data["q"+step]=j;
+
+data["q"+step] = jawaban;
 step++;
 
-if(step<pertanyaan.length){
-tampilSoal();
-}else{
-loading();
+(step < pertanyaan.length)
+? tampilSoal()
+: loading();
 }
-}
+
+
+/* ======================
+   PROGRESS BAR
+====================== */
 
 function updateProgress(){
-let persen=(step/pertanyaan.length)*100;
-document.getElementById("bar").style.width=persen+"%";
+let persen = (step / pertanyaan.length) * 100;
+document.getElementById("bar").style.width = persen + "%";
 }
 
+
+/* ======================
+   LOADING ANALISIS
+====================== */
+
 function loading(){
-document.getElementById("quiz").innerHTML=
+document.getElementById("quiz").innerHTML =
 "⏳ Menganalisis hiburan terbaik untuk kamu...";
 setTimeout(hasil,2000);
 }
+
+
+/* ======================
+   SISTEM REKOMENDASI
+====================== */
 
 function hasil(){
 
 let rekom="";
 
-/* PRIORITAS MOOD */
-if(data.q6=="capek"){
-rekom="😴 Kamu lagi capek.<br>Rekomendasi: Istirahat, nonton film, atau spa santai.";
+/* MOOD CAPEK */
+if(data.q6==="capek"){
+
+    if(data.q5==="game")
+        rekom="😴 Kamu capek tapi masih pengen main.<br>Main game santai sambil rebahan 🎮";
+
+    else if(data.q5==="makan")
+        rekom="🍜 Isi energi dulu dengan makanan enak lalu istirahat.";
+
+    else if(data.q5==="foto")
+        rekom="📸 Healing ringan di tempat tenang.";
+
+    else
+        rekom="🛌 Istirahat total atau nonton santai.";
 }
 
-else if(data.q6=="bosan"){
-rekom="🌆 Kamu butuh suasana baru.<br>Rekomendasi: Jalan sore atau nongkrong ringan.";
+/* MOOD BOSAN */
+else if(data.q6==="bosan"){
+
+    if(data.q0==="luar")
+        rekom="🌆 Jalan keluar cari suasana baru.";
+
+    else
+        rekom="🎮 Main game atau streaming biar gak gabut.";
 }
 
-else if(data.q6=="bahagia" && data.q1=="rame"){
-rekom="🎉 Mood kamu bagus!<br>Rekomendasi: Hangout atau kuliner malam.";
+/* MOOD BAHAGIA */
+else if(data.q6==="bahagia"){
+
+    if(data.q1==="rame")
+        rekom="🎉 Hangout seru bareng teman.";
+
+    else
+        rekom="☕ Santai menikmati waktu sendiri.";
 }
 
-/* TEMPAT */
-else if(data.q0=="dalam" && data.q1=="tenang"){
-rekom="🎬 Staycation atau Movie Time.";
-}
-
-else if(data.q0=="luar" && data.q1=="rame"){
-rekom="🎡 Pergi ke festival atau alun-alun kota.";
-}
-
-/* AKTIVITAS */
-else if(data.q5=="foto"){
-rekom="📸 Wisata tempat instagramable.";
-}
-
-else if(data.q5=="game"){
-rekom="🎮 Main game atau game center.";
-}
-
+/* DEFAULT */
 else{
-rekom="☕ Santai di cafe favorit.";
+rekom="☕ Santai sesuai mood kamu.";
 }
+
+
+/* TAMPILKAN HASIL */
 
 document.getElementById("quiz").innerHTML="";
-document.getElementById("hasil").innerHTML=
-`
+document.getElementById("hasil").innerHTML=`
 ✅ Rekomendasi Hiburan Kamu:<br><br>
 <b>${rekom}</b><br><br>
 <button onclick="ulang()">Main Lagi</button>
 `;
 }
 
+
+/* ======================
+   RESET QUIZ
+====================== */
+
 function ulang(){
 location.reload();
 }
 
+
+/* START */
 tampilSoal();
 
 </script>

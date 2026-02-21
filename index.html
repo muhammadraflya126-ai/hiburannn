@@ -231,49 +231,60 @@ function hasil(){
 
 let rekom="";
 
-/* MOOD CAPEK */
+/* =====================
+   MOOD CAPEK
+===================== */
 if(data.q6==="capek"){
 
-    if(data.q5==="game")
-        rekom="😴 Kamu capek tapi masih pengen main.<br>Main game santai sambil rebahan 🎮";
-
-    else if(data.q5==="makan")
-        rekom="🍜 Isi energi dulu dengan makanan enak lalu istirahat.";
-
-    else if(data.q5==="foto")
-        rekom="📸 Healing ringan di tempat tenang.";
-
-    else
-        rekom="🛌 Istirahat total atau nonton santai.";
+    if(data.q4==="pacar"){
+        rekom="😴 Lagi capek tapi bareng pacar.<br>Rekomendasi: Quality time santai, nonton atau makan ringan bareng ❤️";
+    }
+    else if(data.q5==="game"){
+        rekom="🎮 Main game santai sambil rebahan.";
+    }
+    else{
+        rekom="🛌 Istirahat total biar energi balik.";
+    }
 }
 
-/* MOOD BOSAN */
+/* =====================
+   MOOD BOSAN
+===================== */
 else if(data.q6==="bosan"){
 
-    if(data.q0==="luar")
-        rekom="🌆 Jalan keluar cari suasana baru.";
-
-    else
-        rekom="🎮 Main game atau streaming biar gak gabut.";
+    if(data.q4==="pacar"){
+        rekom="💕 Jalan santai atau kuliner bareng pacar.";
+    }
+    else if(data.q4==="teman"){
+        rekom="🎉 Nongkrong atau cari hiburan bareng teman.";
+    }
+    else{
+        rekom="🎮 Main game atau streaming santai.";
+    }
 }
 
-/* MOOD BAHAGIA */
+/* =====================
+   MOOD BAHAGIA
+===================== */
 else if(data.q6==="bahagia"){
 
-    if(data.q1==="rame")
+    if(data.q4==="pacar"){
+        rekom="❤️ Date time! Nonton, cafe, atau jalan malam bareng pacar.";
+    }
+    else if(data.q4==="teman"){
         rekom="🎉 Hangout seru bareng teman.";
-
-    else
-        rekom="☕ Santai menikmati waktu sendiri.";
+    }
+    else{
+        rekom="☕ Me time menikmati hari bahagia.";
+    }
 }
 
-/* DEFAULT */
+/* =====================
+   DEFAULT
+===================== */
 else{
 rekom="☕ Santai sesuai mood kamu.";
 }
-
-
-/* TAMPILKAN HASIL */
 
 document.getElementById("quiz").innerHTML="";
 document.getElementById("hasil").innerHTML=`

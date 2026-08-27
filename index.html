@@ -1,85 +1,98 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hallo Ini Khusus Untuk Shaula 🤍</title>
+<title>Misi Rahasia Shaula 🤭</title>
 
 <style>
 
-body{
-    font-family: Arial, sans-serif;
-    text-align:center;
-    background:linear-gradient(to right,#4facfe,#00f2fe);
-    color:white;
-    margin:0;
-    padding:20px;
-    min-height:100vh;
+*{
     box-sizing:border-box;
 }
 
-.container{
-    max-width:500px;
-    width:90%;
-    margin:40px auto;
-    background:rgba(0,0,0,0.4);
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4,#a18cd1);
+    padding:20px;
 }
 
-h2{
-    margin-top:0;
+.container{
+    width:100%;
+    max-width:550px;
+    background:rgba(255,255,255,0.9);
+    color:#333;
+    padding:35px 25px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+h1{
+    font-size:28px;
+}
+
+#quiz{
+    margin-top:25px;
+}
+
+.question{
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:20px;
 }
 
 button{
-    padding:12px 20px;
-    margin:8px;
+    width:100%;
+    padding:15px;
+    margin:7px 0;
     border:none;
-    border-radius:10px;
-    background:#28a745;
-    color:white;
+    border-radius:15px;
     font-size:16px;
     cursor:pointer;
-    transition:0.3s;
+    background:#ff7b9c;
+    color:white;
+    transition:0.2s;
 }
 
 button:hover{
-    background:orange;
-    transform:scale(1.05);
+    transform:scale(1.03);
 }
 
 .progress{
     width:100%;
-    height:15px;
+    height:12px;
     background:#ddd;
-    border-radius:10px;
-    margin:20px 0;
+    border-radius:20px;
     overflow:hidden;
+    margin:20px 0;
 }
 
-.progress-bar{
-    height:100%;
+#bar{
     width:0%;
-    background:lime;
-    border-radius:10px;
-    transition:0.5s;
+    height:100%;
+    background:#ff7b9c;
+    transition:0.4s;
 }
 
-#quiz p{
-    font-size:20px;
-    font-weight:bold;
+.hidden{
+    display:none;
 }
 
-#hasil{
+.result{
+    font-size:18px;
     line-height:1.7;
-    font-weight:normal;
 }
 
-.small{
-    font-size:13px;
-    opacity:0.8;
+.big{
+    font-size:25px;
 }
 
 </style>
@@ -87,166 +100,123 @@ button:hover{
 
 <body>
 
-<!-- AUDIO MUSIK -->
-<audio id="music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
-<!-- AUDIO KLIK -->
-<audio id="klik">
-    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
-</audio>
-
-
 <div class="container">
 
-    <h2>🎮 IZENK IZENK2 AE2 🤭</h2>
+    <h1>🕵️ MISI RAHASIA SHAULA 🤭</h1>
 
     <p>
-        Game hiburan khusus untuk<br>
-        <b>SHAULA PUTRI RACHMA 🤍</b>
+        selamat datang, <b>Shaula Putri Rachma</b> 😌<br>
+        kamu telah dipilih untuk mengikuti misi yang sangat penting...
     </p>
 
-    <button onclick="toggleMusic()">🎵 Musik ON / OFF</button>
+    <p>
+        <b>Catatan:</b> tidak ada hadiah, tapi semoga bisa bikin senyum secuilll haha😂
+    </p>
 
     <div class="progress">
-        <div id="bar" class="progress-bar"></div>
+        <div id="bar"></div>
     </div>
 
     <div id="quiz"></div>
-
-    <h3 id="hasil"></h3>
-
-    <p class="small">
-        Sistem hiburan Shaula versi seadanya 😭😂
-    </p>
 
 </div>
 
 
 <script>
 
-/* ======================
-   DATA
-====================== */
-
 let step = 0;
-let data = {};
 
 
-/* ======================
-   PERTANYAAN
-====================== */
+/* =========================
+   DATA PERTANYAAN
+========================= */
 
-const pertanyaan = [
+const questions = [
 
 {
-t:"Shaula lagi bosen nih 😭 Mau hiburan yang mana?",
-o:[
-{text:"🏠 Dalam ruangan aja",v:"dalam"},
-{text:"🌳 Keluar rumah lah",v:"luar"}
+q:"🦸 Kalau Shaula punya kekuatan super hari ini, pilih yang mana?",
+a:[
+"Bisa tidur kapan aja 😭",
+"Bisa teleport ke tempat makan 🍜",
+"Bisa menghilangkan tugas kuliah 🫠"
 ]
 },
 
 {
-t:"Sekarang pengennya suasana gimana?",
-o:[
-{text:"🎉 Yang rame biar lupa waktu",v:"rame"},
-{text:"😌 Yang tenang aja",v:"tenang"}
+q:"🍜 Kalau dikasih makanan gratis seumur hidup, pilih apa?",
+a:[
+"Seblak 🌶️",
+"Mie ayam 🍜",
+"SEMUA JUGA MAU 😭"
 ]
 },
 
 {
-t:"Kalau bisa langsung pergi, pilih waktu...",
-o:[
-{text:"☀️ Siang",v:"siang"},
-{text:"🌙 Malam",v:"malam"}
+q:"🤨 Level kegabutan Shaula hari ini berapa?",
+a:[
+"Masih aman 😌",
+"Gabut dikit 😑",
+"Gabut banget 😭",
+"Sudah butuh pertolongan 😂"
 ]
 },
 
 {
-t:"Budget hari ini gimana nih? 😭",
-o:[
-{text:"💸 Anak kos mode ON",v:"hemat"},
-{text:"😎 Santai, masih aman",v:"bebas"}
+q:"🐱 Kalau tiba-tiba jadi hewan sehari, mau jadi apa?",
+a:[
+"Kucing, kerjaannya tidur 😭",
+"Burung, biar bisa terbang",
+"Hamster, lucu 😌"
 ]
 },
 
 {
-t:"Kalau pergi, paling enak sama siapa?",
-o:[
-{text:"🙋 Sendiri dulu",v:"sendiri"},
-{text:"👯 Bareng teman",v:"teman"},
-{text:"🤍 Orang favorit",v:"favorit"}
+q:"🎁 Kalau tiba-tiba dapat uang 10 juta, yang pertama dilakukan?",
+a:[
+"Makan enak 🍔",
+"Belanja 😭",
+"Ditabung dulu lah 😎",
+"Masih mikir 🤔"
 ]
 },
 
 {
-t:"Pilih aktivitas yang paling menggoda 😭",
-o:[
-{text:"🍜 MAKAN",v:"makan"},
-{text:"🎮 MAIN GAME",v:"game"},
-{text:"📸 FOTO-FOTO",v:"foto"},
-{text:"😴 TIDUR",v:"tidur"}
-]
-},
-
-{
-t:"Mood Shaula sekarang gimana?",
-o:[
-{text:"😮‍💨 Capek banget",v:"capek"},
-{text:"😂 Lumayan seneng",v:"bahagia"},
-{text:"😑 Gabut maksimal",v:"bosan"},
-{text:"🥺 Lagi sedih dikit",v:"sedih"}
+q:"😂 Pilih salah satu yang paling menggambarkan Shaula:",
+a:[
+"Aku lucu tapi orang lain belum sadar 😌",
+"Aku normal kok... kayaknya 😭",
+"Aku cuma butuh makanan",
+"Aku butuh liburan"
 ]
 }
 
 ];
 
 
-/* ======================
-   AUDIO
-====================== */
+/* =========================
+   TAMPILKAN PERTANYAAN
+========================= */
 
-function sound(){
+function showQuestion(){
 
-    let klik = document.getElementById("klik");
-
-    klik.currentTime = 0;
-
-    klik.play().catch(function(){});
-
-}
-
-
-function toggleMusic(){
-
-    let music = document.getElementById("music");
-
-    if(music.paused){
-        music.play();
-    }else{
-        music.pause();
+    if(step >= questions.length){
+        showResult();
+        return;
     }
 
-}
+    let q = questions[step];
 
+    let html = `
+        <div class="question">
+            ${q.q}
+        </div>
+    `;
 
-/* ======================
-   TAMPILKAN SOAL
-====================== */
-
-function tampilSoal(){
-
-    let q = pertanyaan[step];
-
-    let html = `<p>${q.t}</p>`;
-
-    q.o.forEach(p=>{
+    q.a.forEach(answer => {
 
         html += `
-        <button onclick="jawab('${p.v}')">
-            ${p.text}
+        <button onclick="nextQuestion()">
+            ${answer}
         </button>
         `;
 
@@ -259,269 +229,220 @@ function tampilSoal(){
 }
 
 
-/* ======================
-   JAWABAN
-====================== */
+/* =========================
+   LANJUT
+========================= */
 
-function jawab(jawaban){
-
-    sound();
-
-    data["q"+step] = jawaban;
+function nextQuestion(){
 
     step++;
 
-    if(step < pertanyaan.length){
-
-        tampilSoal();
-
-    }else{
-
-        updateProgress();
-
-        loading();
-
-    }
+    showQuestion();
 
 }
 
 
-/* ======================
-   PROGRESS BAR
-====================== */
+/* =========================
+   PROGRESS
+========================= */
 
 function updateProgress(){
 
-    let persen = (step / pertanyaan.length) * 100;
+    let percent = (step / questions.length) * 100;
 
     document.getElementById("bar").style.width =
-    persen + "%";
+    percent + "%";
 
 }
 
 
-/* ======================
-   LOADING
-====================== */
+/* =========================
+   HASIL
+========================= */
 
-function loading(){
+function showResult(){
+
+    document.getElementById("bar").style.width = "100%";
 
     document.getElementById("quiz").innerHTML = `
-    
-    <h3>🧠 Sistem sedang menganalisis Shaula...</h3>
 
-    <p>
-    Mendeteksi tingkat kegabutan... 🤔<br>
-    Mendeteksi mood... 🧐<br>
-    Mencari hiburan terbaik... 🔎<br><br>
+    <div class="result">
 
-    Mohon jangan kabur dulu 😭😂
-    </p>
+        <div class="big">🧐 HASIL ANALISIS SISTEM</div>
+
+        <br>
+
+        Setelah melakukan penelitian yang
+        <b>sangat tidak penting</b> selama beberapa detik... 😭
+
+        <br><br>
+
+        Sistem menemukan sesuatu yang mengejutkan.
+
+        <br><br>
+
+        <b class="big">
+        SHAULA TERDETEKSI SEBAGAI MANUSIA
+        YANG WAJIB SENYUM HARI INI 🤨😂
+        </b>
+
+        <br><br>
+
+        Hukuman hari ini adalah...
+
+        <br>
+
+        <b>COBA SENYUM SEKARANG 😭</b>
+
+        <br><br>
+
+        Iya kamu.
+
+        <br>
+
+        Yang lagi baca ini.
+
+        <br>
+
+        Jangan pura-pura nggak baca 🤨😂
+
+        <br><br>
+
+        <button onclick="belumSenyum()">
+        😑 Aku belum senyum
+        </button>
+
+    </div>
 
     `;
-
-    setTimeout(hasil,2500);
 
 }
 
 
-/* ======================
-   HASIL ANALISIS
-====================== */
+/* =========================
+   BELUM SENYUM
+========================= */
 
-function hasil(){
+function belumSenyum(){
 
-    let rekom = "";
+    document.getElementById("quiz").innerHTML = `
 
+    <div class="result">
 
-    /* MOOD CAPEK */
+        <div class="big">🚨 SISTEM MENDETEKSI KEBOHONGAN 🚨</div>
 
-    if(data.q6 === "capek"){
+        <br>
 
-        if(data.q5 === "tidur"){
+        MASA IYA BELUM SENYUM SAMA SEKALI 😭😂
 
-            rekom = `
-            😭 HASIL ANALISIS:<br><br>
+        <br><br>
 
-            SHAULA BUTUH TIDUR.<br>
-            Tidak ada debat.<br>
-            Tidak ada bantahan.<br><br>
+        Minimal tadi sudut bibirnya
+        naik dikit kan? 🤨
 
-            Sistem menyarankan:
-            rebahan, makan yang enak,
-            terus istirahat dulu 😭🤍
-            `;
+        <br><br>
 
-        }
+        <button onclick="pesanRahasia()">
+        😭 Sekali lagi deh
+        </button>
 
-        else if(data.q5 === "game"){
+    </div>
 
-            rekom = `
-            🎮 HASIL ANALISIS:<br><br>
+    `;
 
-            Shaula lagi capek,
-            tapi otak masih butuh hiburan 😭<br><br>
+}
 
-            Rekomendasi:
-            main game santai,
-            jangan terlalu kompetitif,
-            nanti malah tambah emosi 😂
-            `;
 
-        }
+/* =========================
+   PESAN RAHASIA
+========================= */
 
-        else{
+function pesanRahasia(){
 
-            rekom = `
-            😮‍💨 HASIL ANALISIS:<br><br>
+    document.getElementById("quiz").innerHTML = `
 
-            Hari ini kayaknya Shaula
-            butuh istirahat dulu.<br><br>
+    <div class="result">
 
-            Nggak harus selalu kuat kok.
-            Capek ya istirahat.
-            Pelan-pelan aja 🤍
-            `;
+        <div class="big">🤍 PESAN RAHASIA UNTUK SHAULA 🤍</div>
 
-        }
+        <br>
 
-    }
+        Hari ini mungkin nggak selalu gampang.
 
+        <br><br>
 
-    /* MOOD BOSAN */
+        Tapi semoga game kecil ini
+        minimal bisa bikin kamu
+        senyum sedikit 😄
 
-    else if(data.q6 === "bosan"){
+        <br><br>
 
-        if(data.q4 === "teman"){
+        Kalau sekarang belum bisa
+        bahagia banget juga nggak apa-apa.
 
-            rekom = `
-            🎉 HASIL ANALISIS:<br><br>
+        <br><br>
 
-            Tingkat kegabutan Shaula
-            sudah memasuki level BERBAHAYA 😭<br><br>
+        Pelan-pelan aja.
 
-            Rekomendasi:
-            cari teman,
-            nongkrong,
-            makan,
-            terus ketawa-ketawa nggak jelas 😂
-            `;
+        <br><br>
 
-        }
+        Nggak harus selalu kuat.
+        Nggak harus selalu pura-pura baik-baik aja.
 
-        else{
+        <br><br>
 
-            rekom = `
-            🤭 HASIL ANALISIS:<br><br>
+        Yang penting jangan lupa...
 
-            Shaula sedang mengalami
-            GABUT KRONIS tingkat ringan 😭<br><br>
+        <br><br>
 
-            Solusi:
-            makan sesuatu,
-            nonton,
-            main game,
-            atau cari kegiatan random 😂
-            `;
+        <b class="big">
+        KAMU ITU BERHARGA 🤍
+        </b>
 
-        }
+        <br><br>
 
-    }
+        Dan ada orang yang peduli sama kamu.
 
+        <br><br>
 
-    /* MOOD BAHAGIA */
+        Jadi hari ini...
 
-    else if(data.q6 === "bahagia"){
+        <br>
 
-        rekom = `
-        🎉 HASIL ANALISIS:<br><br>
+        <b>SENYUM DIKIT BOLEH LAH 😭😂🤍</b>
 
-        WAH SHAULA LAGI BAGUS MOOD-NYA 😎<br><br>
+        <br><br>
 
-        Jangan disia-siakan!
-        Pergi, makan, foto-foto,
-        atau lakukan hal yang bikin seneng 😂🤍
-        `;
-
-    }
-
-
-    /* MOOD SEDIH */
-
-    else if(data.q6 === "sedih"){
-
-        rekom = `
-        🤍 HASIL ANALISIS KHUSUS 🤍<br><br>
-
-        Kalau hari ini Shaula lagi sedih,
-        nggak apa-apa kok.<br><br>
-
-        Nggak harus maksa ketawa.
-        Nggak harus pura-pura kuat juga.<br><br>
-
-        Istirahat dulu kalau capek.
-        Cerita kalau pengen cerita.
-        Diam juga nggak masalah.<br><br>
-
-        Pelan-pelan aja ya 🤍<br><br>
-
-        Dan satu lagi...<br>
-        <b>Shaula nggak sendirian 😄🤍</b>
-        `;
-
-    }
-
-
-    /* DEFAULT */
-
-    else{
-
-        rekom = `
-        ☕ Santai aja sesuai mood Shaula 😭😂
-        `;
-
-    }
-
-
-    /* TAMPILKAN HASIL */
-
-    document.getElementById("quiz").innerHTML = "";
-
-    document.getElementById("hasil").innerHTML = `
-
-    🎊 ANALISIS SELESAI 🎊<br><br>
-
-    ${rekom}
-
-    <br><br>
-
-    <button onclick="ulang()">
+        <button onclick="ulang()">
         🔄 Main Lagi
-    </button>
+        </button>
+
+    </div>
 
     `;
 
 }
 
 
-/* ======================
+/* =========================
    ULANG
-====================== */
+========================= */
 
 function ulang(){
 
-    location.reload();
+    step = 0;
+
+    showQuestion();
 
 }
 
 
-/* ======================
-   START
-====================== */
+/* START */
 
-tampilSoal();
+showQuestion();
 
 </script>
 
 </body>
 </html>
+```

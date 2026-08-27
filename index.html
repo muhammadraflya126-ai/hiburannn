@@ -2,30 +2,42 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Kuis Hiburan Interaktif</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IZENK IZENK2 AE2 - Khusus Shaula 🤍</title>
 
 <style>
 
 body{
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     text-align:center;
     background:linear-gradient(to right,#4facfe,#00f2fe);
     color:white;
+    margin:0;
+    padding:20px;
+    min-height:100vh;
+    box-sizing:border-box;
 }
 
 .container{
-    width:500px;
+    max-width:500px;
+    width:90%;
     margin:40px auto;
     background:rgba(0,0,0,0.4);
     padding:30px;
-    border-radius:15px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+    margin-top:0;
 }
 
 button{
     padding:12px 20px;
-    margin:10px;
+    margin:8px;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     background:#28a745;
     color:white;
     font-size:16px;
@@ -40,16 +52,34 @@ button:hover{
 
 .progress{
     width:100%;
-    background:#ccc;
+    height:15px;
+    background:#ddd;
     border-radius:10px;
-    margin-bottom:20px;
+    margin:20px 0;
+    overflow:hidden;
 }
 
 .progress-bar{
-    height:15px;
+    height:100%;
     width:0%;
     background:lime;
     border-radius:10px;
+    transition:0.5s;
+}
+
+#quiz p{
+    font-size:20px;
+    font-weight:bold;
+}
+
+#hasil{
+    line-height:1.7;
+    font-weight:normal;
+}
+
+.small{
+    font-size:13px;
+    opacity:0.8;
 }
 
 </style>
@@ -57,97 +87,117 @@ button:hover{
 
 <body>
 
-<!-- AUDIO -->
+<!-- AUDIO MUSIK -->
 <audio id="music" loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
 </audio>
 
+<!-- AUDIO KLIK -->
 <audio id="klik">
-<source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
 </audio>
+
 
 <div class="container">
 
-<h2>🎮 IZENK IZENK2 AE2</h2>
+    <h2>🎮 IZENK IZENK2 AE2 🤭</h2>
 
-<button onclick="toggleMusic()">🎵 Musik ON / OFF</button>
+    <p>
+        Game hiburan khusus untuk<br>
+        <b>SHAULA PUTRI RACHMA 🤍</b>
+    </p>
 
-<div class="progress">
-<div id="bar" class="progress-bar"></div>
+    <button onclick="toggleMusic()">🎵 Musik ON / OFF</button>
+
+    <div class="progress">
+        <div id="bar" class="progress-bar"></div>
+    </div>
+
+    <div id="quiz"></div>
+
+    <h3 id="hasil"></h3>
+
+    <p class="small">
+        Sistem hiburan Shaula versi seadanya 😭😂
+    </p>
+
 </div>
 
-<div id="quiz"></div>
-<h3 id="hasil"></h3>
-
-</div>
 
 <script>
 
 /* ======================
-   DATA QUIZ
+   DATA
 ====================== */
 
 let step = 0;
 let data = {};
 
+
+/* ======================
+   PERTANYAAN
+====================== */
+
 const pertanyaan = [
 
 {
-t:"Bosen nih, hiburan di mana?",
+t:"Shaula lagi bosen nih 😭 Mau hiburan yang mana?",
 o:[
-{text:"Dalam Ruangan aja",v:"dalam"},
-{text:"Luar Ruangan laa",v:"luar"}
+{text:"🏠 Dalam ruangan aja",v:"dalam"},
+{text:"🌳 Keluar rumah lah",v:"luar"}
 ]
 },
 
 {
-t:"Suasana sesuai mood?",
+t:"Sekarang pengennya suasana gimana?",
 o:[
-{text:"Rame",v:"rame"},
-{text:"Tenang",v:"tenang"}
+{text:"🎉 Yang rame biar lupa waktu",v:"rame"},
+{text:"😌 Yang tenang aja",v:"tenang"}
 ]
 },
 
 {
-t:"Waktu hiburan?",
+t:"Kalau bisa langsung pergi, pilih waktu...",
 o:[
-{text:"Siang",v:"siang"},
-{text:"Malam",v:"malam"}
+{text:"☀️ Siang",v:"siang"},
+{text:"🌙 Malam",v:"malam"}
 ]
 },
 
 {
-t:"Budget kamu?",
+t:"Budget hari ini gimana nih? 😭",
 o:[
-{text:"Anak kos hehe",v:"hemat"},
-{text:"Bebas 😎",v:"bebas"}
+{text:"💸 Anak kos mode ON",v:"hemat"},
+{text:"😎 Santai, masih aman",v:"bebas"}
 ]
 },
 
 {
-t:"Pergi dengan siapa?",
+t:"Kalau pergi, paling enak sama siapa?",
 o:[
-{text:"Sendiri",v:"sendiri"},
-{text:"Teman",v:"teman"},
-{text:"Pacar",v:"pacar"}
+{text:"🙋 Sendiri dulu",v:"sendiri"},
+{text:"👯 Bareng teman",v:"teman"},
+{text:"🤍 Orang favorit",v:"favorit"}
 ]
 },
 
 {
-t:"Aktivitas favorit?",
+t:"Pilih aktivitas yang paling menggoda 😭",
 o:[
-{text:"Makan",v:"makan"},
-{text:"Main Game",v:"game"},
-{text:"Foto-foto",v:"foto"}
+{text:"🍜 MAKAN",v:"makan"},
+{text:"🎮 MAIN GAME",v:"game"},
+{text:"📸 FOTO-FOTO",v:"foto"},
+{text:"😴 TIDUR",v:"tidur"}
 ]
 },
 
 {
-t:"Mood kamu hari ini?",
+t:"Mood Shaula sekarang gimana?",
 o:[
-{text:"Capek gilaa",v:"capek"},
-{text:"Bahagia banget",v:"bahagia"},
-{text:"Bosan gabut",v:"bosan"}
+{text:"😮‍💨 Capek banget",v:"capek"},
+{text:"😂 Lumayan seneng",v:"bahagia"},
+{text:"😑 Gabut maksimal",v:"bosan"},
+{text:"🥺 Lagi sedih dikit",v:"sedih"}
 ]
 }
 
@@ -159,12 +209,26 @@ o:[
 ====================== */
 
 function sound(){
-document.getElementById("klik").play();
+
+    let klik = document.getElementById("klik");
+
+    klik.currentTime = 0;
+
+    klik.play().catch(function(){});
+
 }
 
+
 function toggleMusic(){
-let music=document.getElementById("music");
-music.paused ? music.play() : music.pause();
+
+    let music = document.getElementById("music");
+
+    if(music.paused){
+        music.play();
+    }else{
+        music.pause();
+    }
+
 }
 
 
@@ -174,31 +238,51 @@ music.paused ? music.play() : music.pause();
 
 function tampilSoal(){
 
-let q = pertanyaan[step];
-let html = `<p>${q.t}</p>`;
+    let q = pertanyaan[step];
 
-q.o.forEach(p=>{
-html += `<button onclick="jawab('${p.v}')">${p.text}</button>`;
-});
+    let html = `<p>${q.t}</p>`;
 
-document.getElementById("quiz").innerHTML = html;
-updateProgress();
+    q.o.forEach(p=>{
+
+        html += `
+        <button onclick="jawab('${p.v}')">
+            ${p.text}
+        </button>
+        `;
+
+    });
+
+    document.getElementById("quiz").innerHTML = html;
+
+    updateProgress();
+
 }
 
 
 /* ======================
-   JAWABAN USER
+   JAWABAN
 ====================== */
 
 function jawab(jawaban){
-sound();
 
-data["q"+step] = jawaban;
-step++;
+    sound();
 
-(step < pertanyaan.length)
-? tampilSoal()
-: loading();
+    data["q"+step] = jawaban;
+
+    step++;
+
+    if(step < pertanyaan.length){
+
+        tampilSoal();
+
+    }else{
+
+        updateProgress();
+
+        loading();
+
+    }
+
 }
 
 
@@ -207,104 +291,234 @@ step++;
 ====================== */
 
 function updateProgress(){
-let persen = (step / pertanyaan.length) * 100;
-document.getElementById("bar").style.width = persen + "%";
+
+    let persen = (step / pertanyaan.length) * 100;
+
+    document.getElementById("bar").style.width =
+    persen + "%";
+
 }
 
 
 /* ======================
-   LOADING ANALISIS
+   LOADING
 ====================== */
 
 function loading(){
-document.getElementById("quiz").innerHTML =
-"⏳ Menganalisis hiburan terbaik untuk kamu...";
-setTimeout(hasil,2000);
+
+    document.getElementById("quiz").innerHTML = `
+    
+    <h3>🧠 Sistem sedang menganalisis Shaula...</h3>
+
+    <p>
+    Mendeteksi tingkat kegabutan... 🤔<br>
+    Mendeteksi mood... 🧐<br>
+    Mencari hiburan terbaik... 🔎<br><br>
+
+    Mohon jangan kabur dulu 😭😂
+    </p>
+
+    `;
+
+    setTimeout(hasil,2500);
+
 }
 
 
 /* ======================
-   SISTEM REKOMENDASI
+   HASIL ANALISIS
 ====================== */
 
 function hasil(){
 
-let rekom="";
+    let rekom = "";
 
-/* =====================
-   MOOD CAPEK
-===================== */
-if(data.q6==="capek"){
 
-    if(data.q4==="pacar"){
-        rekom="😴 Lagi capek tapi bareng pacar.<br>Rekomendasi: Quality time santai, nonton atau makan ringan bareng ❤️";
+    /* MOOD CAPEK */
+
+    if(data.q6 === "capek"){
+
+        if(data.q5 === "tidur"){
+
+            rekom = `
+            😭 HASIL ANALISIS:<br><br>
+
+            SHAULA BUTUH TIDUR.<br>
+            Tidak ada debat.<br>
+            Tidak ada bantahan.<br><br>
+
+            Sistem menyarankan:
+            rebahan, makan yang enak,
+            terus istirahat dulu 😭🤍
+            `;
+
+        }
+
+        else if(data.q5 === "game"){
+
+            rekom = `
+            🎮 HASIL ANALISIS:<br><br>
+
+            Shaula lagi capek,
+            tapi otak masih butuh hiburan 😭<br><br>
+
+            Rekomendasi:
+            main game santai,
+            jangan terlalu kompetitif,
+            nanti malah tambah emosi 😂
+            `;
+
+        }
+
+        else{
+
+            rekom = `
+            😮‍💨 HASIL ANALISIS:<br><br>
+
+            Hari ini kayaknya Shaula
+            butuh istirahat dulu.<br><br>
+
+            Nggak harus selalu kuat kok.
+            Capek ya istirahat.
+            Pelan-pelan aja 🤍
+            `;
+
+        }
+
     }
-    else if(data.q5==="game"){
-        rekom="🎮 Main game santai sambil rebahan.";
+
+
+    /* MOOD BOSAN */
+
+    else if(data.q6 === "bosan"){
+
+        if(data.q4 === "teman"){
+
+            rekom = `
+            🎉 HASIL ANALISIS:<br><br>
+
+            Tingkat kegabutan Shaula
+            sudah memasuki level BERBAHAYA 😭<br><br>
+
+            Rekomendasi:
+            cari teman,
+            nongkrong,
+            makan,
+            terus ketawa-ketawa nggak jelas 😂
+            `;
+
+        }
+
+        else{
+
+            rekom = `
+            🤭 HASIL ANALISIS:<br><br>
+
+            Shaula sedang mengalami
+            GABUT KRONIS tingkat ringan 😭<br><br>
+
+            Solusi:
+            makan sesuatu,
+            nonton,
+            main game,
+            atau cari kegiatan random 😂
+            `;
+
+        }
+
     }
+
+
+    /* MOOD BAHAGIA */
+
+    else if(data.q6 === "bahagia"){
+
+        rekom = `
+        🎉 HASIL ANALISIS:<br><br>
+
+        WAH SHAULA LAGI BAGUS MOOD-NYA 😎<br><br>
+
+        Jangan disia-siakan!
+        Pergi, makan, foto-foto,
+        atau lakukan hal yang bikin seneng 😂🤍
+        `;
+
+    }
+
+
+    /* MOOD SEDIH */
+
+    else if(data.q6 === "sedih"){
+
+        rekom = `
+        🤍 HASIL ANALISIS KHUSUS 🤍<br><br>
+
+        Kalau hari ini Shaula lagi sedih,
+        nggak apa-apa kok.<br><br>
+
+        Nggak harus maksa ketawa.
+        Nggak harus pura-pura kuat juga.<br><br>
+
+        Istirahat dulu kalau capek.
+        Cerita kalau pengen cerita.
+        Diam juga nggak masalah.<br><br>
+
+        Pelan-pelan aja ya 🤍<br><br>
+
+        Dan satu lagi...<br>
+        <b>Shaula nggak sendirian 😄🤍</b>
+        `;
+
+    }
+
+
+    /* DEFAULT */
+
     else{
-        rekom="🛌 Istirahat total biar energi balik.";
-    }
-}
 
-/* =====================
-   MOOD BOSAN
-===================== */
-else if(data.q6==="bosan"){
+        rekom = `
+        ☕ Santai aja sesuai mood Shaula 😭😂
+        `;
 
-    if(data.q4==="pacar"){
-        rekom="💕 Jalan santai atau kuliner bareng pacar.";
     }
-    else if(data.q4==="teman"){
-        rekom="🎉 Nongkrong atau cari hiburan bareng teman.";
-    }
-    else{
-        rekom="🎮 Main game atau streaming santai.";
-    }
-}
 
-/* =====================
-   MOOD BAHAGIA
-===================== */
-else if(data.q6==="bahagia"){
 
-    if(data.q4==="pacar"){
-        rekom="❤️ Date time! Nonton, cafe, atau jalan malam bareng pacar.";
-    }
-    else if(data.q4==="teman"){
-        rekom="🎉 Hangout seru bareng teman.";
-    }
-    else{
-        rekom="☕ Me time menikmati hari bahagia.";
-    }
-}
+    /* TAMPILKAN HASIL */
 
-/* =====================
-   DEFAULT
-===================== */
-else{
-rekom="☕ Santai sesuai mood kamu.";
-}
+    document.getElementById("quiz").innerHTML = "";
 
-document.getElementById("quiz").innerHTML="";
-document.getElementById("hasil").innerHTML=`
-✅ Rekomendasi Hiburan Kamu:<br><br>
-<b>${rekom}</b><br><br>
-<button onclick="ulang()">Main Lagi</button>
-`;
+    document.getElementById("hasil").innerHTML = `
+
+    🎊 ANALISIS SELESAI 🎊<br><br>
+
+    ${rekom}
+
+    <br><br>
+
+    <button onclick="ulang()">
+        🔄 Main Lagi
+    </button>
+
+    `;
+
 }
 
 
 /* ======================
-   RESET QUIZ
+   ULANG
 ====================== */
 
 function ulang(){
-location.reload();
+
+    location.reload();
+
 }
 
 
-/* START */
+/* ======================
+   START
+====================== */
+
 tampilSoal();
 
 </script>

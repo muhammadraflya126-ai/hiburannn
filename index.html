@@ -27,7 +27,7 @@ body{
 .container{
     width:100%;
     max-width:550px;
-    background:rgba(255,255,255,0.9);
+    background:rgba(255,255,255,0.92);
     color:#333;
     padding:35px 25px;
     border-radius:25px;
@@ -36,6 +36,7 @@ body{
 
 h1{
     font-size:28px;
+    margin-bottom:15px;
 }
 
 #quiz{
@@ -46,6 +47,7 @@ h1{
     font-size:21px;
     font-weight:bold;
     margin-bottom:20px;
+    line-height:1.4;
 }
 
 button{
@@ -59,6 +61,7 @@ button{
     background:#ff7b9c;
     color:white;
     transition:0.2s;
+    font-weight:bold;
 }
 
 button:hover{
@@ -71,7 +74,7 @@ button:hover{
     background:#ddd;
     border-radius:20px;
     overflow:hidden;
-    margin:20px 0;
+    margin:25px 0 20px;
 }
 
 #bar{
@@ -81,17 +84,19 @@ button:hover{
     transition:0.4s;
 }
 
-.hidden{
-    display:none;
-}
-
 .result{
     font-size:18px;
-    line-height:1.7;
+    line-height:1.8;
 }
 
 .big{
     font-size:25px;
+    font-weight:bold;
+}
+
+.small{
+    font-size:14px;
+    opacity:0.7;
 }
 
 </style>
@@ -104,12 +109,14 @@ button:hover{
     <h1>🕵️ MISI RAHASIA SHAULA 🤭</h1>
 
     <p>
-        selamat datang, <b>Shaula Putri Rachma</b> 😌<br>
-        kamu telah dipilih untuk mengikuti misi yang sangat penting...
+        Selamat datang, <b>Shaula Putri Rachma</b> 😌<br>
+        Kamu telah dipilih untuk mengikuti misi yang sangat sangat penting...
     </p>
 
     <p>
-        <b>Catatan:</b> tidak ada hadiah, tapi semoga bisa bikin senyum secuilll haha😂
+        <b>Catatan:</b> tidak ada hadiah, tidak ada uang,
+        dan tidak ada makanan gratis, tapi nanti kita beli jus yaa hahaha<br>
+        Tapi semoga bisa bikin kamu senyum secuilll 😂
     </p>
 
     <div class="progress">
@@ -117,6 +124,8 @@ button:hover{
     </div>
 
     <div id="quiz"></div>
+
+    <p class="small">Jujur aja, jawabanmu akan diawasi sistem 🤨😂</p>
 
 </div>
 
@@ -135,7 +144,7 @@ const questions = [
 {
 q:"🦸 Kalau Shaula punya kekuatan super hari ini, pilih yang mana?",
 a:[
-"Bisa tidur kapan aja 😭",
+"Bisa tidur kapan aja ",
 "Bisa teleport ke tempat makan 🍜",
 "Bisa menghilangkan tugas kuliah 🫠"
 ]
@@ -146,7 +155,7 @@ q:"🍜 Kalau dikasih makanan gratis seumur hidup, pilih apa?",
 a:[
 "Seblak 🌶️",
 "Mie ayam 🍜",
-"SEMUA JUGA MAU 😭"
+"SEMUA JUGA MAU "
 ]
 },
 
@@ -161,21 +170,21 @@ a:[
 },
 
 {
-q:"🐱 Kalau tiba-tiba jadi hewan sehari, mau jadi apa?",
+q:"🐹 Kalau tiba-tiba jadi hewan sehari, mau jadi apa?",
 a:[
 "Kucing, kerjaannya tidur 😭",
-"Burung, biar bisa terbang",
-"Hamster, lucu 😌"
+"Burung, biar bisa terbang 🕊️",
+"Hamster, lucu aja 😌"
 ]
 },
 
 {
 q:"🎁 Kalau tiba-tiba dapat uang 10 juta, yang pertama dilakukan?",
 a:[
-"Makan enak 🍔",
+"Makan enak dulu 🍔",
 "Belanja 😭",
 "Ditabung dulu lah 😎",
-"Masih mikir 🤔"
+"Masih bengong dulu 🤔"
 ]
 },
 
@@ -184,8 +193,18 @@ q:"😂 Pilih salah satu yang paling menggambarkan Shaula:",
 a:[
 "Aku lucu tapi orang lain belum sadar 😌",
 "Aku normal kok... kayaknya 😭",
-"Aku cuma butuh makanan",
-"Aku butuh liburan"
+"Aku cuma butuh makanan 🍜",
+"Aku butuh liburan sekarang juga ✈️"
+]
+},
+
+{
+q:"🤍 Terakhir nih, kalau hari ini bisa dapat satu hal, kamu pilih apa?",
+a:[
+"Ketawa sampai lupa waktu 😂",
+"Jalan-jalan tanpa mikirin apa-apa 😌",
+"Pelukan yang bikin tenang 🤍",
+"Hari yang lebih baik 🌤️"
 ]
 }
 
@@ -276,20 +295,38 @@ function showResult(){
 
         <br><br>
 
-        Sistem menemukan sesuatu yang mengejutkan.
+        Sistem akhirnya menemukan sesuatu.
 
         <br><br>
 
         <b class="big">
         SHAULA TERDETEKSI SEBAGAI MANUSIA
-        YANG WAJIB SENYUM HARI INI 🤨😂
+        YANG TERLALU BERHARGA
+        UNTUK LUPA SENYUM 🤨😂🤍
         </b>
 
         <br><br>
 
-        Hukuman hari ini adalah...
+        Dan berdasarkan jawaban tadi...
+
+        <br><br>
+
+        Kesimpulan sistem adalah:
 
         <br>
+
+        <b>
+        SHAULA MEMBUTUHKAN MAKANAN,
+        ISTIRAHAT,
+        HIBURAN,
+        DAN SEDIKIT KEBAHAGIAAN 😭😂
+        </b>
+
+        <br><br>
+
+        Tapi ada satu tugas terakhir...
+
+        <br><br>
 
         <b>COBA SENYUM SEKARANG 😭</b>
 
@@ -332,17 +369,27 @@ function belumSenyum(){
 
         <br>
 
-        MASA IYA BELUM SENYUM SAMA SEKALI 😭😂
+        MASA IYA BELUM SENYUM SAMA SEKALI 😂
 
         <br><br>
+
+        Coba jujur...
+
+        <br>
 
         Minimal tadi sudut bibirnya
         naik dikit kan? 🤨
 
         <br><br>
 
+        Atau jangan-jangan sekarang
+        malah senyum sendiri sambil
+        mikir "apaan sih ini" 😭😂
+
+        <br><br>
+
         <button onclick="pesanRahasia()">
-        😭 Sekali lagi deh
+        😭 Yaudah, lanjut
         </button>
 
     </div>
@@ -366,31 +413,47 @@ function pesanRahasia(){
 
         <br>
 
-        Hari ini mungkin nggak selalu gampang.
+        Sebenarnya...
 
         <br><br>
 
-        Tapi semoga game kecil ini
-        minimal bisa bikin kamu
-        senyum sedikit 😄
+        Game kecil ini memang nggak bisa
+        menyelesaikan semuanya.
 
         <br><br>
 
-        Kalau sekarang belum bisa
-        bahagia banget juga nggak apa-apa.
+        Tapi kalau tadi kamu sempat senyum,
+        walaupun cuma sedikit...
+
+        <br>
+
+        berarti misi ini berhasil 😄
 
         <br><br>
+
+        Kadang kita memang cuma butuh
+        sedikit waktu untuk berhenti,
+        tarik napas,
+        dan ngga mikirin semuanya sekaligus.
+
+        <br><br>
+
+        Jadi kalau hari ini terasa berat,
+        ngga apa-apa kok.
+
+        <br>
 
         Pelan-pelan aja.
 
         <br><br>
 
-        Nggak harus selalu kuat.
-        Nggak harus selalu pura-pura baik-baik aja.
+        Ngga harus selalu kuat.
+        Ngga harus selalu kelihatan baik-baik aja.
 
         <br><br>
 
-        Yang penting jangan lupa...
+        Tapi jangan lupa satu hal yaa...
+        disini ada aku, dann banyak banget yang masi sayang sama kamu...
 
         <br><br>
 
@@ -400,15 +463,40 @@ function pesanRahasia(){
 
         <br><br>
 
-        Dan ada orang yang peduli sama kamu.
-
-        <br><br>
-
-        Jadi hari ini...
+        Dan semoga, setelah membaca sampai sini...
 
         <br>
 
-        <b>SENYUM DIKIT BOLEH LAH 😭😂🤍</b>
+        kamu tahu kalau ada orang yang
+        pengen kamu baik-baik aja.
+
+        <br><br>
+
+        Bukan harus selalu ketawa.
+
+        <br>
+
+        Bukan harus selalu bahagia.
+
+        <br><br>
+
+        Cukup jadi Shaula aja.
+
+        <br><br>
+
+        Karena itu juga udah cukup. 🤍
+
+        <br><br>
+
+        Oh iya...
+
+        <br><br>
+
+        <b>
+        JANGAN SEDIH TERUS YAA 
+        NANTI AKU BINGUNG MAU BIKIN
+        APALAGI BUAT BIKIN KAMU SENYUM 🤍
+        </b>
 
         <br><br>
 
@@ -444,4 +532,3 @@ showQuestion();
 
 </body>
 </html>
-```
